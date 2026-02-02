@@ -325,3 +325,86 @@ const interval=setInterval(()=>{
         clearInterval(interval)
     }
 },1000)
+const studentName=document.querySelector('#name')
+const button=document.querySelector('.btn')
+const list=document.querySelector('.list')
+
+button.addEventListener('click',()=>{
+    const li=document.createElement('li')
+    li.innerText=studentName.value
+    list.appendChild(li)
+    studentName.value=" "
+})
+
+button.addEventListener('click',()=>{
+    const li=document.createElement('li')
+    const deleteButton=document.createElement('button')
+
+    li.innerText=studentName.value
+    deleteButton.innerText="delete"
+
+    deleteButton.addEventListener('click',()=>{
+        //li.remove()
+        list.removeChild(li)
+    })
+    li.appendChild(deleteButton)
+    list.appendChild(li)
+    
+    studentName.value=" "
+})
+
+console.log("startinghomework..");
+
+setTimeout(() =>{
+    console.log("homework done!");
+    console.log("starting done!");
+    setTimeout(() =>{
+        console.log("dinner done!");
+        console.log("getting ready to go out..!");
+        setTimeout(() =>{
+            console.log("going to the playground!...!");
+        },1000);
+    },1500);
+},2000);    
+
+function finishHomework(callback){
+    console.log("starting homework..");
+    setTimeout(() =>{
+        console.log("homework done!.");
+        callback();
+    },2000);
+}
+
+function eatDinner(callback){
+    console.log("starting dinner..");
+    setTimeout(() =>{
+        console.log("Dinner done!.");
+        callback();
+    },1500);
+}
+function goToPlayground(){
+console.log("going to playground!..");
+}
+finishHomework(() => {
+    eatDinner(()=>{
+        goToPlayground();
+    });
+});
+const p=new Promise((res,rej)=>{
+    console.log("going to do the homework!")
+
+    setTimeout(()=>{
+        const done=true;
+        if(done){
+            res("success")
+        }else{
+            rej("failed to fetch data from the server")
+        }
+    },3000)
+})
+
+p.then((a)=>{
+    console.log(a)
+}).catch((err)=>{
+    console.log(a)
+})
